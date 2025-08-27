@@ -107,7 +107,7 @@ export function HeroSplit() {
                 <img
                   src="https://images.pexels.com/photos/4481259/pexels-photo-4481259.jpeg"
                   alt="Modern logistics warehouse with organized cargo"
-                  className="w-full h-[400px] md:h-[500px] object-cover rounded-2xl shadow-2xl"
+                  className="w-full h-[300px] md:h-[350px] object-cover rounded-2xl shadow-2xl"
                 />
               </motion.div>
               
@@ -123,7 +123,7 @@ export function HeroSplit() {
                   repeatType: "reverse",
                   ease: "easeInOut"
                 }}
-                className="absolute -top-6 -right-6 bg-white p-4 rounded-xl shadow-lg border"
+                className="absolute -top-6 -right-6 bg-white p-4 rounded-xl shadow-lg border z-10"
               >
                 <div className="flex items-center space-x-3">
                   <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
@@ -147,7 +147,7 @@ export function HeroSplit() {
                   repeatType: "reverse",
                   ease: "easeInOut"
                 }}
-                className="absolute -bottom-4 -left-4 bg-white p-4 rounded-xl shadow-lg border"
+                className="absolute -bottom-4 -left-4 bg-white p-4 rounded-xl shadow-lg border z-10"
               >
                 <div className="flex items-center space-x-3">
                   <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
