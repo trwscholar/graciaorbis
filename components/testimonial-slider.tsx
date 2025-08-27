@@ -49,14 +49,19 @@ export function TestimonialSlider() {
   };
 
   return (
-    <section className="section-padding bg-gray-50">
-      <Container>
+    <section className="section-padding bg-brand-gradient relative overflow-hidden">
+      {/* Subtle overlays for depth */}
+      <div className="absolute inset-0 bg-black/10"></div>
+      <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full -translate-y-48 translate-x-48"></div>
+      <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full translate-y-32 -translate-x-32"></div>
+
+      <Container className="relative z-10">
         <SectionHeader
           badge="Testimonials"
           title="Trusted by businesses across Malaysia"
           description="See what our clients say about our logistics services and partnership approach."
           centered
-          className="mb-16"
+          className="mb-16 text-white"
         />
 
         <div className="relative max-w-4xl mx-auto">
@@ -67,10 +72,10 @@ export function TestimonialSlider() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -50 }}
               transition={{ duration: 0.5 }}
-              className="bg-white rounded-2xl p-8 lg:p-12 shadow-lg border border-gray-100"
+              className="bg-white rounded-2xl p-8 lg:p-12 shadow-xl border border-gray-100"
             >
               <div className="text-center">
-                <Quote size={48} className="text-primary/20 mx-auto mb-6" />
+                <Quote size={48} className="text-primary/30 mx-auto mb-6" />
                 
                 <div className="flex justify-center mb-6">
                   {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
@@ -78,7 +83,7 @@ export function TestimonialSlider() {
                   ))}
                 </div>
 
-                <p className="text-xl text-gray-600 leading-relaxed mb-8 italic">
+                <p className="text-xl text-gray-700 leading-relaxed mb-8 italic">
                   "{testimonials[currentIndex].content}"
                 </p>
 
@@ -107,10 +112,10 @@ export function TestimonialSlider() {
           {/* Navigation */}
           <div className="flex items-center justify-center space-x-4 mt-8">
             <Button
-              variant="outline"
+              variant="ghost"
               size="icon"
               onClick={previousTestimonial}
-              className="h-12 w-12 rounded-full"
+              className="h-12 w-12 rounded-full bg-white text-primary shadow-md hover:bg-gray-100"
             >
               <ChevronLeft size={20} />
             </Button>
@@ -121,17 +126,17 @@ export function TestimonialSlider() {
                   key={index}
                   onClick={() => setCurrentIndex(index)}
                   className={`w-3 h-3 rounded-full transition-colors ${
-                    index === currentIndex ? 'bg-primary' : 'bg-gray-300'
+                    index === currentIndex ? 'bg-white' : 'bg-white/50'
                   }`}
                 />
               ))}
             </div>
 
             <Button
-              variant="outline"
+              variant="ghost"
               size="icon"
               onClick={nextTestimonial}
-              className="h-12 w-12 rounded-full"
+              className="h-12 w-12 rounded-full bg-white text-primary shadow-md hover:bg-gray-100"
             >
               <ChevronRight size={20} />
             </Button>

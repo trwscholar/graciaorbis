@@ -39,7 +39,7 @@ const tips = [
 
 export function LatestTips() {
   return (
-    <section className="section-padding" style={{ backgroundColor: 'var(--blush-surface)' }}>
+    <section className="section-padding" style={{ backgroundColor: 'var(--pure-white)' }}>
       <Container>
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-16">
           <SectionHeader
