@@ -21,7 +21,7 @@ const config: Config = {
       },
       rotate: {
         // 👇 merged from second config
-        '5': '5deg',
+        '15': '15deg',
       },
       borderRadius: {
         lg: 'var(--radius)',
