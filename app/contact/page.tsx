@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Button } from '@/components/ui/button';
+import { GradientButton } from '@/components/ui/gradient-button';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -33,7 +33,6 @@ export default function ContactPage() {
 
   const showOther = service === 'Other';
 
-  // Build a lightweight embed URL (no API key required)
   const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(
     COMPANY_ADDRESS
   )}&hl=en&z=16&output=embed`;
@@ -110,28 +109,27 @@ export default function ContactPage() {
                   <div>
                     <Label htmlFor="service">Service</Label>
                     <select
-                        id="service"
-                        name="service"
-                        className={cn(
-                            'mt-2 w-full rounded-md border border-gray-200 bg-white px-3 py-2.5',
-                            'text-sm shadow-sm outline-none focus:ring-2 focus:ring-[color:var(--brand-orange-300)]',
-                            service === '' ? 'text-gray-400' : 'text-gray-900' // placeholder grey, selected black
-                        )}
-                        value={service}
-                        onChange={(e) => setService(e.target.value)}
-                        required
-                        >
-                        <option value="" disabled className="text-gray-400">
-                            Select a service
+                      id="service"
+                      name="service"
+                      className={cn(
+                        'mt-2 w-full rounded-md border border-gray-200 bg-white px-3 py-2.5',
+                        'text-sm shadow-sm outline-none focus:ring-2 focus:ring-[color:var(--brand-orange-300)]',
+                        service === '' ? 'text-gray-400' : 'text-gray-900'
+                      )}
+                      value={service}
+                      onChange={(e) => setService(e.target.value)}
+                      required
+                    >
+                      <option value="" disabled className="text-gray-400">
+                        Select a service
+                      </option>
+                      {SERVICES.map((s) => (
+                        <option key={s} value={s} className="text-gray-900">
+                          {s}
                         </option>
-                        {SERVICES.map((s) => (
-                            <option key={s} value={s} className="text-gray-900">
-                            {s}
-                            </option>
-                        ))}
-                        <option value="Other" className="text-gray-900">Other</option>
-                        </select>
-
+                      ))}
+                      <option value="Other" className="text-gray-900">Other</option>
+                    </select>
                   </div>
 
                   {showOther && (
@@ -160,20 +158,11 @@ export default function ContactPage() {
                   />
                 </div>
 
-                {/* Submit button with appealing effect */}
+                {/* Submit button (Gradient) */}
                 <div className="pt-2">
-                  <Button
-                    type="submit"
-                    className={cn(
-                      'w-full md:w-auto px-6 py-3 text-base font-semibold',
-                      'bg-brand-gradient text-white',
-                      'transition-transform duration-200',
-                      'hover:scale-[1.02] hover:drop-shadow-[0_0_18px_var(--brand-orange-300)]',
-                      'focus-visible:ring-2 focus-visible:ring-[color:var(--brand-orange-400)]'
-                    )}
-                  >
-                    Send Request
-                  </Button>
+                  <GradientButton type="submit" aria-label="Submit contact form">
+                    SUBMIT
+                  </GradientButton>
 
                   {submitted && (
                     <p className="mt-3 text-sm text-green-700">
