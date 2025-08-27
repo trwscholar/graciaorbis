@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { cn } from '@/lib/utils';
+import { FlickeringGrid } from '@/components/ui/flickering-grid-hero';
 
 const SERVICES = [
   'Ocean Freight',
@@ -27,21 +28,93 @@ export default function ContactPage() {
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    // TODO: wire to your /api/contact or third-party form endpoint
     setSubmitted(true);
   }
 
   const showOther = service === 'Other';
-
   const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(
     COMPANY_ADDRESS
   )}&hl=en&z=16&output=embed`;
 
+  // Use your /public/gracialogo.png as a CSS mask
+  const LOGO_MASK_STYLE: React.CSSProperties = {
+    WebkitMaskImage: `url('/gracialogo.png')`,
+    WebkitMaskSize: '115vw',
+    WebkitMaskPosition: 'center',
+    WebkitMaskRepeat: 'no-repeat',
+    maskImage: `url('/gracialogo.png')`,
+    maskSize: '115vw',
+    maskPosition: 'center',
+    maskRepeat: 'no-repeat',
+  };
+
+  // Region splits
+  const LEFT_G_CLIP: React.CSSProperties = { clipPath: 'inset(0 50% 0 0)' };
+  const RIGHT_O_CLIP: React.CSSProperties = { clipPath: 'inset(0 0 0 50%)' };
+  const ARROW_CLIP: React.CSSProperties = {
+    clipPath:
+      'polygon(60% 38%, 60% 62%, 72% 62%, 72% 70%, 94% 50%, 72% 30%, 72% 38%)',
+  };
+
   return (
-    <main className="min-h-screen bg-[color:var(--base-background)]">
-      <section className="max-w-5xl mx-auto container-padding pt-32 pb-20">
+    <main className="min-h-screen bg-[color:var(--base-background)] relative">
+      {/* SECTION keeps vertical bounds; background inside is full-bleed horizontally */}
+      <section className="relative max-w-5xl mx-auto container-padding pt-32 pb-20">
+        {/* ===== FULL-BLEED BACKGROUND (scoped to this section's height only) ===== */}
+        <div
+          className="
+            pointer-events-none absolute top-0 bottom-0
+            left-1/2 -translate-x-1/2 w-screen
+            z-0
+          "
+        >
+          {/* base grey dots for contrast on white */}
+          <FlickeringGrid
+            className="absolute inset-0 opacity-20"
+            color="rgb(148,163,184)"   // slate-400
+            maxOpacity={0.08}
+            flickerChance={0.08}
+            squareSize={3}
+            gridGap={5}
+          />
+
+          {/* Right O ring (black) */}
+          <div className="absolute inset-0 opacity-85" style={{ ...LOGO_MASK_STYLE, ...RIGHT_O_CLIP }}>
+            <FlickeringGrid
+              color="rgb(0,0,0)"
+              maxOpacity={0.55}
+              flickerChance={0.16}
+              squareSize={4}
+              gridGap={3}
+            />
+          </div>
+
+          {/* Arrow (orange) */}
+          <div className="absolute inset-0 opacity-95" style={{ ...LOGO_MASK_STYLE, ...ARROW_CLIP }}>
+            <FlickeringGrid
+              color="rgb(251,146,80)"   // brand orange 500
+              maxOpacity={0.85}
+              flickerChance={0.24}
+              squareSize={4}
+              gridGap={3}
+            />
+          </div>
+
+          {/* Left G (orange) */}
+          <div className="absolute inset-0 opacity-90" style={{ ...LOGO_MASK_STYLE, ...LEFT_G_CLIP }}>
+            <FlickeringGrid
+              color="rgb(251,146,80)"
+              maxOpacity={0.75}
+              flickerChance={0.20}
+              squareSize={4}
+              gridGap={3}
+            />
+          </div>
+        </div>
+        {/* ===== END BACKGROUND ===== */}
+
         {/* Page header */}
-        <div className="mb-10">
+        <div className="mb-10 relative z-10">
           <p className="inline-block rounded-full border px-3 py-1 text-xs font-semibold tracking-widest uppercase text-[color:var(--brand-orange-600)] border-[color:var(--brand-orange-200)]">
             Get in touch
           </p>
@@ -57,7 +130,7 @@ export default function ContactPage() {
         </div>
 
         {/* Content grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 relative z-10">
           {/* Lead form */}
           <div className="lg:col-span-3">
             <div className="rounded-2xl border border-gray-100 bg-white/90 backdrop-blur p-6 md:p-8 shadow-sm">
@@ -226,7 +299,7 @@ export default function ContactPage() {
         </div>
 
         {/* Map - subtle card so it’s not distracting */}
-        <div className="mt-12">
+        <div className="mt-12 relative z-10">
           <h2 className="sr-only">Find us</h2>
           <div className="rounded-2xl border border-gray-100 shadow-sm overflow-hidden bg-white">
             <iframe
