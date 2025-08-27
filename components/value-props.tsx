@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import { DollarSign, Zap, Shield, Award } from 'lucide-react';
 import { Container } from '@/components/ui/container';
 
@@ -11,28 +10,32 @@ const valueProps = [
     title: 'Cost-Effective',
     description:
       'Optimized routes and consolidated loads to reduce your shipping costs without compromising quality.',
-    image: '/CostOrbis.jpg',
+    color: 'bg-green-100 text-green-700',
+    image: 'CostOrbis.jpg',
   },
   {
     icon: Zap,
     title: 'Proactive',
     description:
       'Real-time updates and clear communication throughout your shipment journey.',
-    image: '/ProactiveOrbis.jpg',
+    color: 'bg-blue-100 text-blue-700',
+    image: 'ProactiveOrbis.jpg',
   },
   {
     icon: Shield,
     title: 'Reliable',
     description:
       'On-time delivery and careful handling with comprehensive insurance coverage.',
-    image: '/ReliableOrbis.jpg',
+    color: 'bg-purple-100 text-purple-700',
+    image: 'ReliableOrbis.jpg',
   },
   {
     icon: Award,
     title: 'Experienced',
     description:
       'Decades of combined expertise in logistics across diverse industries and markets.',
-    image: '/ExperiencedOrbis.jpg',
+    color: 'bg-orange-100 text-orange-700',
+    image: 'ExperiencedOrbis.jpg',
   },
 ];
 
@@ -55,40 +58,40 @@ export function ValueProps() {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {valueProps.map((prop, index) => {
-            const Icon = prop.icon;
-            return (
-              <motion.div
-                key={prop.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                whileHover={{ y: -5 }}
-                className="group relative rounded-2xl overflow-hidden shadow-lg"
-              >
-                {/* Background image */}
-                <Image
-                  src={prop.image}
-                  alt={prop.title}
-                  fill
-                  className="object-cover"
+          {valueProps.map((prop, index) => (
+            <motion.div
+              key={prop.title}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              whileHover={{ y: -5 }}
+              className="group relative overflow-hidden rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300 h-full"
+            >
+              {/* Background Image */}
+              {prop.image && (
+                <div
+                  className="absolute inset-0 bg-cover bg-center"
+                  style={{ backgroundImage: `url(${prop.image})` }}
                 />
+              )}
 
-                {/* Dark overlay for readability */}
-                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-all duration-300" />
+              {/* Overlay for readability */}
+              <div className="absolute inset-0 bg-white/60 group-hover:bg-white/40 transition-colors duration-300" />
 
-                {/* Content on top */}
-                <div className="relative z-10 p-6 text-white flex flex-col h-full justify-end">
-                  <div className="mb-4 inline-flex items-center justify-center w-12 h-12 rounded-xl bg-white/20 backdrop-blur-sm">
-                    <Icon size={24} className="text-white" />
-                  </div>
-                  <h3 className="text-lg font-semibold mb-2">{prop.title}</h3>
-                  <p className="text-sm text-gray-200">{prop.description}</p>
+              {/* Content */}
+              <div className="relative p-8 h-full">
+                <div
+                  className={`inline-flex items-center justify-center w-12 h-12 rounded-xl ${prop.color} mb-6`}
+                >
+                  <prop.icon size={24} />
                 </div>
-              </motion.div>
-            );
-          })}
+
+                <h3 className="text-gray-900 mb-4">{prop.title}</h3>
+                <p className="text-gray-700">{prop.description}</p>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </Container>
     </section>
