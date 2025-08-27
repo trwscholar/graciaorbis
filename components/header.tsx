@@ -32,9 +32,7 @@ export function Header() {
       <header
         className={cn(
           'fixed top-0 w-full z-50 transition-all duration-300',
-          isScrolled
-            ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100'
-            : 'bg-transparent'
+          'bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100'
         )}
       >
         <div className="max-w-7xl mx-auto container-padding">

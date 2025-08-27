@@ -7,8 +7,16 @@ import { Container } from '@/components/ui/container';
 
 export function HeroSplit() {
   return (
-    <section className="relative pt-20 pb-16 md:pt-28 md:pb-20 bg-gradient-to-b from-gray-50/50 to-white overflow-hidden">
-      <Container>
+    <section
+      className="relative pt-20 pb-16 md:pt-28 md:pb-20 overflow-hidden bg-cover bg-center"
+      style={{ backgroundImage: "url('/HeroOrbis.png')" }}
+    >
+      {/* Overlay for readability */}
+      <div className="absolute inset-0 bg-black/50 z-0"></div>
+      {/* Optional brand tint */}
+      <div className="absolute inset-0 bg-brand-gradient opacity-20 mix-blend-multiply z-0"></div>
+
+      <Container className="relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Column - Content */}
           <motion.div
@@ -18,11 +26,11 @@ export function HeroSplit() {
             className="space-y-8"
           >
             <div className="space-y-6">
-              <div className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-primary/10 text-primary border border-primary/20">
+              <div className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-white/10 text-white border border-white/20">
                 Trusted logistics partner since 2018
               </div>
               
-              <h1 className="text-gray-900">
+              <h1 className="text-white leading-tight">
                 End-to-end logistics,{' '}
                 <span className="relative">
                   from cold-chain to cargo ships
@@ -35,35 +43,42 @@ export function HeroSplit() {
                 </span>
               </h1>
               
-              <p className="text-xl text-gray-600 leading-relaxed max-w-lg">
+              <p className="text-xl text-white/90 leading-relaxed max-w-lg">
                 Cost-effective, proactive, and reliable delivery across Malaysia and beyond. 
                 Air and ocean freight, bonded trucking, 3PL warehousing, customs brokerage, and last mile.
               </p>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="text-base px-8">
+              <Button
+                size="lg"
+                className="text-base px-8 bg-white text-primary hover:bg-white/90"
+              >
                 Get a Quote
                 <ArrowRight size={18} className="ml-2" />
               </Button>
-              <Button size="lg" variant="outline" className="text-base px-8">
+              <Button
+                size="lg"
+                variant="outline"
+                className="text-base px-8 border-white text-white hover:bg-white/10"
+              >
                 <Play size={18} className="mr-2" />
                 Talk to Sales
               </Button>
             </div>
 
-            <div className="grid grid-cols-3 gap-6 pt-8 border-t border-gray-200">
+            <div className="grid grid-cols-3 gap-6 pt-8 border-t border-white/20">
               <div>
-                <div className="text-2xl font-bold text-primary">500+</div>
-                <div className="text-sm text-gray-600">Shipments monthly</div>
+                <div className="text-2xl font-bold text-white">500+</div>
+                <div className="text-sm text-white/80">Shipments monthly</div>
               </div>
               <div>
-                <div className="text-2xl font-bold text-primary">15+</div>
-                <div className="text-sm text-gray-600">Countries served</div>
+                <div className="text-2xl font-bold text-white">15+</div>
+                <div className="text-sm text-white/80">Countries served</div>
               </div>
               <div>
-                <div className="text-2xl font-bold text-primary">99.8%</div>
-                <div className="text-sm text-gray-600">On-time delivery</div>
+                <div className="text-2xl font-bold text-white">99.8%</div>
+                <div className="text-sm text-white/80">On-time delivery</div>
               </div>
             </div>
           </motion.div>
@@ -145,8 +160,8 @@ export function HeroSplit() {
                 </div>
               </motion.div>
 
-              {/* Background gradient */}
-              <div className="absolute inset-0 bg-brand-gradient opacity-5 rounded-2xl -z-10"></div>
+              {/* Subtle background highlight */}
+              <div className="absolute inset-0 bg-brand-gradient opacity-10 rounded-2xl -z-10"></div>
             </div>
           </motion.div>
         </div>
