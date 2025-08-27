@@ -16,6 +16,12 @@ const config: Config = {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        // 👇 merged from second config
+        'noise': "url('https://www.reactbits.dev/assets/noise.png')",
+      },
+      rotate: {
+        // 👇 merged from second config
+        '5': '5deg',
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -90,4 +96,5 @@ const config: Config = {
   },
   plugins: [require('tailwindcss-animate')],
 };
+
 export default config;
