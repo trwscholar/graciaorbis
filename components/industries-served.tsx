@@ -16,7 +16,7 @@ const industries = [
 
 export function IndustriesServed() {
   return (
-    <section className="section-padding" style={{ backgroundColor: 'var(--blush-surface)' }}>
+    <section className="section-padding" style={{ backgroundColor: 'var(--peach-header)' }}>
       <Container>
         <SectionHeader
           badge="Industries"
