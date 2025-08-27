@@ -14,19 +14,16 @@ export function Header() {
   const [isServicesOpen, setIsServicesOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Removed Tips
   const navigation = [
     { name: 'Home', href: '/' },
     { name: 'About', href: '/about' },
     { name: 'Services', href: '/services', hasDropdown: true },
-    { name: 'Tips', href: '/tips' },
     { name: 'Contact', href: '/contact' },
   ];
 
@@ -44,29 +41,26 @@ export function Header() {
           <div
             className={cn(
               'flex items-center justify-between transition-all duration-300',
-              isScrolled ? 'h-16' : 'h-20'
+              isScrolled ? 'h-20' : 'h-24'
             )}
           >
-            {/* Brand with logo + text */}
-            <Link href="/" className="flex items-center gap-3" aria-label="Go to home">
+            {/* Brand */}
+            <Link href="/" className="flex items-center gap-4" aria-label="Go to home">
               <Image
-                src="/gracialogo.png" // change extension if it's .svg
+                src="/gracialogo.png" // change to .svg if needed
                 alt="Gracia Orbis Logo"
-                width={100}
-                height={100}
-                className="h-100 w-100 object-fill"
+                width={140}
+                height={140}
+                className="h-14 w-auto object-contain md:h-16"
                 priority
               />
-
               <div className="leading-tight">
-                <div className="text-[11px] sm:text-[12px] font-semibold tracking-[0.24em] uppercase text-[color:var(--brand-orange-600)]">
+                <div className="text-[12px] sm:text-[13px] font-semibold tracking-[0.24em] uppercase text-[color:var(--brand-orange-600)]">
                   Another Delivery By
                 </div>
-                <div className="text-lg sm:text-xl md:text-2xl font-bold">
-                  {/* Gracia */}
+                <div className="text-2xl sm:text-[28px] md:text-3xl font-bold">
                   <span className="text-[color:var(--brand-orange-600)]">G</span>
                   <span className="text-gray-900">racia </span>
-                  {/* Orbis */}
                   <span className="text-gray-900">O</span>
                   <span className="text-[color:var(--brand-orange-600)]">rbis</span>
                 </div>
@@ -74,21 +68,29 @@ export function Header() {
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center space-x-8">
+            <nav className="hidden lg:flex items-center space-x-10">
               {navigation.map((item) => (
-                <div key={item.name} className="relative">
+                <div
+                  key={item.name}
+                  className="relative"
+                  onMouseLeave={() => item.hasDropdown && setIsServicesOpen(false)}
+                >
                   {item.hasDropdown ? (
-                    <button
+                    // Make Services a real link; still opens mega on hover/focus
+                    <Link
+                      href={item.href}
                       onMouseEnter={() => setIsServicesOpen(true)}
-                      onMouseLeave={() => setIsServicesOpen(false)}
-                      className="flex items-center space-x-1 text-gray-700 hover:text-primary transition-colors font-medium focus-ring"
+                      onFocus={() => setIsServicesOpen(true)}
+                      className="text-gray-800 transition-colors font-medium text-[17px] focus-ring hover:text-[color:var(--brand-orange-600)] hover:drop-shadow-[0_0_6px_var(--brand-orange-400)]"
+                      aria-haspopup="true"
+                      aria-expanded={isServicesOpen}
                     >
-                      <span>{item.name}</span>
-                    </button>
+                      {item.name}
+                    </Link>
                   ) : (
                     <Link
                       href={item.href}
-                      className="text-gray-700 hover:text-primary transition-colors font-medium focus-ring"
+                      className="text-gray-800 transition-colors font-medium text-[17px] focus-ring hover:text-[color:var(--brand-orange-600)] hover:drop-shadow-[0_0_6px_var(--brand-orange-400)]"
                     >
                       {item.name}
                     </Link>
@@ -99,7 +101,7 @@ export function Header() {
 
             {/* Desktop CTA */}
             <div className="hidden lg:flex items-center space-x-4">
-              <Button size="sm" variant="outline">
+              <Button size="lg" variant="outline" className="px-5 py-2.5 text-[15px] hover:drop-shadow-[0_0_8px_var(--brand-orange-300)] hover:border-[color:var(--brand-orange-400)]">
                 Get Quote
               </Button>
             </div>
@@ -107,10 +109,10 @@ export function Header() {
             {/* Mobile menu button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2 text-gray-700 focus-ring"
+              className="lg:hidden p-3 text-gray-700 focus-ring"
               aria-label="Toggle menu"
             >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
           </div>
         </div>
@@ -126,31 +128,26 @@ export function Header() {
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className="fixed inset-0 z-40 lg:hidden">
-          <div
-            className="fixed inset-0 bg-black/50"
-            onClick={() => setIsMobileMenuOpen(false)}
-          />
-          <div className="fixed right-0 top-0 h-full w-80 bg-white shadow-xl">
-            <div className="p-6">
-              {/* Mobile menu header */}
-              <div className="flex items-center justify-between mb-8">
-                <span className="font-semibold text-xl">Menu</span>
+          <div className="fixed inset-0 bg-black/50" onClick={() => setIsMobileMenuOpen(false)} />
+          <div className="fixed right-0 top-0 h-full w-96 bg-white shadow-xl">
+            <div className="p-7">
+              <div className="flex items-center justify-between mb-10">
+                <span className="font-semibold text-2xl">Menu</span>
                 <button
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="p-2 text-gray-500 focus-ring"
+                  className="p-2.5 text-gray-500 focus-ring"
                   aria-label="Close menu"
                 >
-                  <X size={20} />
+                  <X size={22} />
                 </button>
               </div>
 
-              {/* Nav links */}
-              <nav className="space-y-6">
+              <nav className="space-y-7">
                 {navigation.map((item) => (
                   <Link
                     key={item.name}
                     href={item.href}
-                    className="block text-lg font-medium text-gray-900 focus-ring"
+                    className="block text-xl font-medium text-gray-900 focus-ring hover:text-[color:var(--brand-orange-600)] hover:drop-shadow-[0_0_6px_var(--brand-orange-400)]"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {item.name}
@@ -158,8 +155,7 @@ export function Header() {
                 ))}
               </nav>
 
-              {/* Actions */}
-              <div className="mt-8 pt-8 border-t space-y-4">
+              <div className="mt-10 pt-8 border-t space-y-4">
                 <Button className="w-full" size="lg">
                   Get Quote
                 </Button>
